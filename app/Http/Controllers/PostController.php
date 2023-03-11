@@ -52,7 +52,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $this->authorize('update', $post);
+        $this->authorize('update', $post); // defined in Policies -> PostPolicy.php
 
         return view('posts.edit', [
             'post' => $post,
@@ -64,7 +64,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $this->authorize('update', $post);
+        $this->authorize('update', $post); // defined in Policies -> PostPolicy.php
 
         $validated = $request->validate([
             'message' => 'required|string|max:255'
@@ -80,7 +80,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $this->authorize('delete', $post);
+        $this->authorize('delete', $post);  // defined in Policies -> PostPolicy.php
 
         $post->delete();
 
