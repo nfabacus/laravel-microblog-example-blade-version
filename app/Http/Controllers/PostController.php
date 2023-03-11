@@ -52,7 +52,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $this->authorize('update', $post);
+
+        return view('posts.edit', [
+            'post' => $post,
+        ]);
     }
 
     /**
@@ -60,7 +64,15 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $this->authorize('update', $post);
+
+        $validated = $request->validate([
+            'message' => 'required|string|max:255'
+        ]);
+
+        $post->update($validated);
+
+        return redirect('/posts');
     }
 
     /**
@@ -68,6 +80,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $this->authorize('delete', $post);
+
+        $post->delete();
+
+        return redirect('/posts');
     }
 }

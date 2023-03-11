@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
 // When you use Route::resource with the generated controller like below, it knows that 'index' is GET and 'store' is POST.
 // You can also check what routes are available by running 'php artisan route:list' in the terminal.
 Route::resource('posts', PostController::class)
-    ->only(['index', 'store'])
+    ->only(['index', 'store', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
